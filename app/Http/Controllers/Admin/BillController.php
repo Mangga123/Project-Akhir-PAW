@@ -13,7 +13,6 @@ class BillController extends Controller
     // Daftar Tagihan
     public function index()
     {
-        // Load relasi payment juga untuk melihat bukti
         $bills = Bill::with(['resident.user', 'resident.unit', 'payment'])->latest()->paginate(10);
         return view('admin.bills.index', compact('bills'));
     }
@@ -47,20 +46,28 @@ class BillController extends Controller
         return redirect()->route('admin.bills.index')->with('success', 'Tagihan berhasil dibuat!');
     }
 
+    // ==========================================
+    //  INI BAGIAN YANG DIPERBAIKI (FIX ERROR DELETE)
+    // ==========================================
     public function destroy(Bill $bill)
     {
+        // Cek apakah tagihan ini punya pembayaran terkait?
+        if ($bill->payment) {
+            // Hapus dulu pembayarannya
+            $bill->payment->delete();
+        }
+
+        // Baru hapus tagihannya
         $bill->delete();
-        return redirect()->route('admin.bills.index')->with('success', 'Tagihan dihapus.');
+        
+        return redirect()->route('admin.bills.index')->with('success', 'Tagihan (dan riwayat pembayarannya) berhasil dihapus.');
     }
 
-    /**
-     * Konfirmasi Pembayaran (Terima/Tolak) - FITUR BARU
-     */
     public function confirmPayment(Request $request, Bill $bill)
     {
         $request->validate([
             'action' => 'required|in:accept,reject',
-            'admin_note' => 'nullable|string', // Catatan wajib jika ditolak
+            'admin_note' => 'nullable|string',
         ]);
 
         $payment = $bill->payment;
@@ -70,12 +77,10 @@ class BillController extends Controller
         }
 
         if ($request->action == 'accept') {
-            // TERIMA: Tagihan Lunas, Payment Dikonfirmasi
             $bill->update(['status' => 'Lunas']);
             $payment->update(['status' => 'Dikonfirmasi']);
             $message = 'Pembayaran berhasil dikonfirmasi. Status tagihan LUNAS.';
         } else {
-            // TOLAK: Tagihan balik jadi Belum Dibayar, Payment Ditolak + Catatan
             $bill->update(['status' => 'Belum Dibayar']); 
             $payment->update([
                 'status' => 'Ditolak',

@@ -9,13 +9,43 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
-    // ... (kode yang sudah ada)
+    /**
+     * DAFTAR KOLOM YANG BOLEH DIISI (WHITELIST)
+     * Ini yang menyebabkan error tadi jika belum didaftarkan.
+     */
+    protected $fillable = [
+        'role_id',  // ✅ Wajib ada agar bisa set role
+        'name',
+        'email',
+        'password',
+        'phone',    // ✅ Wajib ada agar bisa simpan No HP
+    ];
 
     /**
-     * Get the role that owns the user.
+     * The attributes that should be hidden for serialization.
+     */
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    /**
+     * Get the attributes that should be cast.
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    // ================= RELASI & HELPER =================
+
+    /**
+     * Relasi: User punya satu Role
      */
     public function role()
     {
@@ -23,7 +53,8 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if user is an admin.
+     * Helper: Cek apakah user adalah Admin
+     * Dipakai di middleware & redirect dashboard
      */
     public function isAdmin()
     {
@@ -31,10 +62,10 @@ class User extends Authenticatable
     }
 
     /**
-     * Check if user is a resident.
+     * Relasi: User (Warga) punya satu data Resident
      */
-    public function isResident()
+    public function resident()
     {
-        return $this->role && $this->role->role_name === 'Resident';
+        return $this->hasOne(Resident::class);
     }
 }
