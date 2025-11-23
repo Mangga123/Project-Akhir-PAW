@@ -141,15 +141,6 @@ npm run dev
 * [ ] Integrasi Payment Gateway
 
 ---
-
-## 👤 **Author**
-
-**Angga Prima Ramadhan**
-📧 [angga@email.com](mailto:angga@email.com)
-🌐 Universitas Brawijaya — FILKOM
-
----
-
 ## 📜 **License**
 
 Distributed under the MIT License.
