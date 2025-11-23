@@ -1,189 +1,141 @@
-# 🏢 ApartmentSys — Modern Apartment Management System
+Siap! Ini dia **README Premium + Aesthetic + Gradient + Separator**, dibuat khusus untuk proyekmu **“Realtiy Apartment”**, lengkap, rapi, dan siap pakai ✨
+
+---
+
+# 🌇 Realtiy Apartment
+
+### *Modern Web-Based Apartment Management Platform*
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Laravel-10%2F11-red?style=for-the-badge">
-  <img src="https://img.shields.io/badge/PHP-8%2B-blue?style=for-the-badge">
-  <img src="https://img.shields.io/badge/MySQL-Database-orange?style=for-the-badge">
-  <img src="https://img.shields.io/badge/TailwindCSS-3.x-0EA5E9?style=for-the-badge">
+  <img src="https://img.shields.io/badge/STATUS-Active-4ade80?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/VERSION-1.0-6366f1?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/FRAMEWORK-Laravel-f43f5e?style=for-the-badge" />
 </p>
 
-<p align="center"><b>A web-based platform for managing apartment units, residents, billing, and facility complaints — built with Laravel.</b></p>
+---
+
+## 🎨 **Preview**
+
+> A clean and modern interface to manage apartment units, residents, billing, facilities, and daily administrative activities — all in one streamlined platform.
 
 ---
 
-## 📘 Table of Contents
+## ✨ **Features**
 
-* [✨ Features](#-features)
-* [🖼️ UI Preview](#️-ui-preview)
-* [🛠️ Tech Stack](#-tech-stack)
-* [📦 Installation](#-installation)
-* [🗄️ Database Setup](#-database-setup)
-* [▶️ Run the App](#️-run-the-app)
-* [📊 ERD Overview](#-erd-overview)
-* [🔐 Demo Accounts](#-demo-accounts)
-* [📄 License](#-license)
-
----
-
-## ✨ Features
-
-### 🔐 Role-Based Authentication
-
-* Role **Admin** & **Resident**
-* Akses fitur menyesuaikan role
-
-### 🏢 Apartment Unit Management
-
-* Tambah, edit, hapus, dan lihat unit
-* Status unit: *Available* / *Occupied*
-
-### 👥 Resident Management
-
-* Registrasi penghuni baru
-* Pengelolaan penyewa + data unit
-
-### 💳 Billing System
-
-* Admin membuat tagihan
-* Penghuni upload bukti pembayaran
-* Admin verifikasi
-
-### 🔧 Complaint Management
-
-* Penghuni mengirim keluhan fasilitas
-* Upload foto
-* Update status penanganan
+* 🏢 Manage apartment units & occupancy
+* 👥 Resident management & registration
+* 💵 Monthly billing & invoice tracking
+* 🧾 Payment history & receipt generation
+* 🛠️ Facility complaint submission system
+* 📊 Admin dashboard with charts & stats
+* 🔐 Secure authentication & role-based access
+* ⚙️ Responsive & minimalistic UI
 
 ---
 
-## 🖼️ UI Preview
+## 🌈 **Aesthetic Gradient Separator**
 
-> *(Tambahkan screenshot nanti, tinggal upload lalu ganti linknya)*
-> Contoh format:
-
-```
-p align="center">
-  <img src="screenshots/dashboard-admin.png" width="800">
-  <br>
-  <i>Admin Dashboard</i>
-</p>
+```md
+────────────────────────── ✦ 𝙍 𝙀 𝘼 𝙇 𝙏 𝙄 𝙔  ·  𝘼 𝙋 𝘼 𝙍 𝙏 𝙈 𝙀 𝙉 𝙏 ✦ ──────────────────────────
 ```
 
 ---
 
-## 🛠 Tech Stack
+## 📂 **Project Structure**
 
-| Layer    | Tools                 |
-| -------- | --------------------- |
-| Backend  | Laravel 10/11, PHP 8+ |
-| Frontend | Blade, TailwindCSS    |
-| Database | MySQL                 |
-| Others   | Node.js, npm, XAMPP   |
+```
+RealtiyApartment/
+│── app/
+│── bootstrap/
+│── config/
+│── database/
+│   ├── migrations/
+│   └── seeders/
+│── public/
+│── resources/
+│   ├── views/
+│   ├── css/
+│   └── js/
+│── routes/
+│── storage/
+│── tests/
+└── vendor/
+```
 
 ---
 
-## 📦 Installation
+## 🚀 **Installation Guide**
 
-### 1. Clone Repository
+### 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/username-kamu/nama-repo.git
-cd nama-repo
+git clone https://github.com/your-username/realtiy-apartment.git
+cd realtiy-apartment
 ```
 
-### 2. Install Dependencies
+### 2️⃣ Install Dependencies
 
 ```bash
 composer install
 npm install
-npm run build
 ```
 
----
-
-## 🗄️ Database Setup
-
-### 1. Create Database
-
-```
-projectpaw
-```
-
-### 2. Copy & Configure Environment File
+### 3️⃣ Setup Environment
 
 ```bash
 cp .env.example .env
+php artisan key:generate
 ```
 
-Edit bagian:
-
-```
-DB_DATABASE=projectpaw
-DB_PORT=3306   # atau 3307 jika XAMPP kamu pakai port itu
-```
-
-### 3. Generate Key & Migrate
+### 4️⃣ Setup Database
 
 ```bash
-php artisan key:generate
-php artisan migrate:fresh --seed
+php artisan migrate --seed
 ```
 
----
-
-## ▶️ Run the App
+### 5️⃣ Run The Application
 
 ```bash
 php artisan serve
-```
-
-Buka di browser:
-
-```
-http://127.0.0.1:8000
+npm run dev
 ```
 
 ---
 
-## 📊 ERD Overview
+## 📊 **Core Modules**
 
-```
-+-----------+       +-----------+
-|   users   | 1   n | residents |
-+-----------+-------+-----------+
-       |                 |
-       |                 |
-       | 1         n     |
-       +------ units ----+
-               |
-               | 1   n
-              bills
-```
-
-*(bisa dibuatkan diagram versi gambar kalau mau)*
+| Module             | Description                             |
+| ------------------ | --------------------------------------- |
+| 🏢 Unit Management | Mengatur unit apartemen & status hunian |
+| 👤 Residents       | Data penghuni, kontrak, riwayat         |
+| 💵 Billing         | Tagihan bulanan + pembayaran            |
+| 🛠️ Complaints     | Keluhan fasilitas & tindak lanjut       |
+| 📈 Dashboard       | Statistik keuangan & occupancy          |
 
 ---
 
-## 🔐 Demo Accounts
+## 🗺️ **Roadmap**
 
-### 👑 Admin
-
-```
-email: admin@gmail.com
-password: password
-```
-
-### 👤 Resident
-
-```
-email: user@gmail.com
-password: password
-```
+* [ ] Mobile-friendly PWA
+* [ ] Notification Center (Email & WhatsApp)
+* [ ] Multi-Apartment Support
+* [ ] Export laporan (PDF, Excel)
+* [ ] Integrasi Payment Gateway
 
 ---
 
-## 📄 License
+## 👤 **Author**
 
-```
-MIT License — free to modify and use.
-```
+**Angga Prima Ramadhan**
+📧 [angga@email.com](mailto:angga@email.com)
+🌐 Universitas Brawijaya — FILKOM
+
+---
+
+## 📜 **License**
+
+Distributed under the MIT License.
+
+---
+
+Kalau mau aku bikin versi **README dengan icon + header SVG + gradient full custom seperti template perusahaan**, bilang aja ya! ✨
