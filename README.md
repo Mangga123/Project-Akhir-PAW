@@ -1,7 +1,3 @@
-Siap! Ini dia **README Premium + Aesthetic + Gradient + Separator**, dibuat khusus untuk proyekmu **“Realtiy Apartment”**, lengkap, rapi, dan siap pakai ✨
-
----
-
 # 🌇 Realtiy Apartment
 
 ### *Modern Web-Based Apartment Management Platform*
@@ -138,4 +134,3 @@ Distributed under the MIT License.
 
 ---
 
-Kalau mau aku bikin versi **README dengan icon + header SVG + gradient full custom seperti template perusahaan**, bilang aja ya! ✨
