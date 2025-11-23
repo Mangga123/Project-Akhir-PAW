@@ -53,6 +53,7 @@
         }
     </style>
     <!-- Chosen Palette: Slate (Neutral Background) + Indigo (Primary Brand) + Emerald (Success/Code) -->
+
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
@@ -109,9 +110,9 @@
                     </a>
                 </div>
             </div>
-            
-            <!-- Visualization & Content Choices: 
-                 Hero Viz -> Goal: Show 'Outcome' -> Method: Chart.js Doughnut -> Interaction: Tooltip -> 
+
+            <!-- Visualization & Content Choices:
+                 Hero Viz -> Goal: Show 'Outcome' -> Method: Chart.js Doughnut -> Interaction: Tooltip ->
                  Justification: Visually demonstrates the kind of data the system manages (Occupancy), making the abstract concept concrete immediately. -->
             <div class="bg-white p-6 rounded-2xl shadow-xl border border-slate-100 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-purple-500"></div>
@@ -215,7 +216,7 @@
     <section id="installation" class="py-20 bg-slate-50">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-slate-900 mb-8 text-center">🚀 Panduan Instalasi</h2>
-            
+
             <!-- Interactive Terminal Component -->
             <div class="terminal-window bg-slate-800 rounded-xl overflow-hidden border border-slate-700">
                 <!-- Terminal Header with Tabs -->
@@ -233,7 +234,7 @@
 
                 <!-- Terminal Content Areas -->
                 <div class="p-6 font-mono text-sm min-h-[200px]">
-                    
+
                     <!-- Step 1 Content -->
                     <div id="step1" class="step-content">
                         <p class="text-slate-400 mb-4"># Mulai dengan meng-clone repository dan install dependensi</p>
@@ -285,11 +286,11 @@
     <section id="database" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl font-bold text-slate-900 mb-10 text-center">🗄️ Struktur Database</h2>
-            
+
             <!-- Visualization Choice: Grid layout of tables. NO Mermaid used.
                  Goal: Organize -> Method: Styled HTML Grid -> Interaction: None needed, pure reference. -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                
+
                 <!-- Table: Users -->
                 <div class="border border-slate-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition">
                     <div class="bg-slate-800 text-white px-4 py-2 font-mono font-bold flex items-center gap-2">
@@ -364,7 +365,7 @@
         <div class="max-w-4xl mx-auto px-4 text-center">
             <h2 class="text-3xl font-bold mb-8">🔑 Akses Demo</h2>
             <p class="mb-8 opacity-90">Gunakan kredensial berikut untuk menguji sistem di lingkungan lokal Anda.</p>
-            
+
             <div class="grid md:grid-cols-2 gap-6 text-left">
                 <!-- Admin Card -->
                 <div class="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
@@ -425,13 +426,13 @@
             document.querySelectorAll('.step-content').forEach(el => el.classList.add('hidden'));
             // Show selected content
             document.getElementById(stepId).classList.remove('hidden');
-            
+
             // Reset buttons styles
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('bg-slate-700', 'text-white');
                 btn.classList.add('text-slate-400', 'hover:bg-slate-800');
             });
-            
+
             // Active button style
             const activeBtn = document.getElementById('btn-' + stepId);
             activeBtn.classList.remove('text-slate-400', 'hover:bg-slate-800');
@@ -445,7 +446,7 @@
                 button.innerText = 'Copied!';
                 button.classList.remove('bg-indigo-600');
                 button.classList.add('bg-green-600');
-                
+
                 setTimeout(() => {
                     button.innerText = originalText;
                     button.classList.add('bg-indigo-600');
@@ -458,7 +459,7 @@
         // Displays a mock distribution of Unit Occupancy to visualize system data
         document.addEventListener('DOMContentLoaded', function() {
             const ctx = document.getElementById('heroChart').getContext('2d');
-            
+
             // Data simulating 50 Units
             const data = {
                 labels: ['Terisi (Occupied)', 'Kosong (Vacant)', 'Maintenance'],
@@ -515,5 +516,6 @@
         });
     </script>
     <!-- CONFIRMATION: NO SVG graphics used (Unicode/FontAwesome logic applied). NO Mermaid JS used. -->
+
 </body>
 </html>
