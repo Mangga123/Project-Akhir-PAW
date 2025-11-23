@@ -1,59 +1,106 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+<?php
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+namespace App\Http\Controllers\Resident;
 
-## About Laravel
+use App\Http\Controllers\Controller;
+use App\Models\Bill;
+use App\Models\Payment;
+use App\Models\Resident;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+class PaymentController extends Controller
+{
+    /**
+     * Tampilkan daftar tagihan milik penghuni yang login.
+     */
+    public function index()
+    {
+        // Ambil data resident dari user yang login
+        $resident = Resident::where('user_id', Auth::id())->first();
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+        // Ambil tagihan, urutkan dari yang terbaru
+        // Kita juga ambil relasi 'payment' untuk mengecek status/catatan admin
+        $bills = $resident 
+            ? Bill::with('payment')->where('resident_id', $resident->id)->latest()->get()
+            : collect();
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+        return view('resident.bills.index', compact('bills'));
+    }
 
-## Learning Laravel
+    /**
+     * Tampilkan form upload bukti bayar.
+     */
+    public function create(Bill $bill)
+    {
+        $resident = Resident::where('user_id', Auth::id())->firstOrFail();
+        
+        // Keamanan: Pastikan tagihan ini benar milik user yang login
+        if ($bill->resident_id != $resident->id) {
+            abort(403, 'Akses Ditolak.');
+        }
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+        // Jika statusnya Menunggu Konfirmasi atau Lunas, tidak boleh upload ulang 
+        // KECUALI jika status pembayarannya 'Ditolak'
+        if ($bill->status == 'Menunggu Konfirmasi' || $bill->status == 'Lunas') {
+            // Cek apakah ditolak
+            if (!$bill->payment || $bill->payment->status != 'Ditolak') {
+                 return redirect()->route('resident.bills.index')->with('error', 'Tagihan sedang diproses atau sudah lunas.');
+            }
+        }
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+        return view('resident.payments.create', compact('bill'));
+    }
 
-## Laravel Sponsors
+    /**
+     * Simpan bukti bayar.
+     */
+    public function store(Request $request, Bill $bill)
+    {
+        $request->validate([
+            'payment_date' => 'required|date',
+            'proof_image' => 'required|image|mimes:jpg,jpeg,png|max:2048', // Max 2MB
+        ]);
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+        // Cek apakah sudah ada pembayaran sebelumnya (misal ditolak)
+        $payment = Payment::where('bill_id', $bill->id)->first();
 
-### Premium Partners
+        // Upload File Gambar
+        if ($request->hasFile('proof_image')) {
+            $file = $request->file('proof_image');
+            // Nama file: 1700755200_bukti_budi.jpg
+            $filename = time() . '_' . $file->getClientOriginalName();
+            // Simpan ke public/payments
+            $file->move(public_path('payments'), $filename); 
+        } else {
+            $filename = null;
+        }
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+        if ($payment) {
+            // Update data lama (Re-upload karena ditolak sebelumnya)
+            $payment->update([
+                'payment_date' => $request->payment_date,
+                'amount' => $bill->amount,
+                'proof_image' => $filename ?? $payment->proof_image,
+                'status' => 'Pending',
+                'admin_note' => null, // Reset catatan admin agar bersih kembali
+            ]);
+        } else {
+            // Buat pembayaran baru
+            Payment::create([
+                'bill_id' => $bill->id,
+                'user_id' => Auth::id(),
+                'payment_date' => $request->payment_date,
+                'amount' => $bill->amount,
+                'proof_image' => $filename,
+                'status' => 'Pending',
+            ]);
+        }
 
-## Contributing
+        // Update Status Tagihan jadi "Menunggu Konfirmasi"
+        $bill->update(['status' => 'Menunggu Konfirmasi']);
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+        return redirect()->route('resident.bills.index')
+            ->with('success', 'Bukti pembayaran berhasil dikirim! Tunggu konfirmasi admin.');
+    }
+}
