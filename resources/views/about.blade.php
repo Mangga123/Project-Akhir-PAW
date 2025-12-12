@@ -50,9 +50,9 @@
                     At Realty, we believe that every space has a story. Our mission is to bring that story to life through thoughtful and innovative design. With over 20 years of experience, we specialize in creating personalized interiors that reflect our clients' unique tastes and lifestyles.
                 </p>
 
-                <a href="#team" class="border border-gray-300 px-6 py-2 text-gray-600 text-sm font-medium rounded-sm hover:bg-gray-50 transition flex items-center gap-2 font-serif italic">
-                    More About Us &rarr;
-                </a>
+                <a href="{{ route('contact') }}" class="border border-gray-300 px-6 py-2 text-gray-600 text-sm font-medium rounded-sm hover:bg-gray-50 transition flex items-center gap-2 font-serif italic">
+                     More About Us &rarr;
+                    </a>
 
             </div>
         </div>
@@ -68,7 +68,7 @@
                 <div class="bg-white p-8 shadow-sm border-t-4 border-[#F48C46]">
                     <h3 class="text-2xl font-bold text-gray-900 mb-4 font-serif">Misi Kami</h3>
                     <p class="text-gray-600 leading-relaxed text-sm">
-                        Menyediakan database properti yang lengkap dan terverifikasi, serta memberikan layanan manajemen apartemen yang profesional dan responsif.
+                        Menyediakan apartement serta sitem management properti yang lengkap dan terverifikasi, serta memberikan layanan manajemen apartemen yang profesional dan responsif.
                     </p>
                 </div>
             </div>

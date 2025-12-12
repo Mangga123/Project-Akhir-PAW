@@ -39,9 +39,9 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300 border border-gray-100 flex flex-col items-center text-center group">
                 <div class="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-[#F2F9F5] group-hover:border-[#A8E6CF] transition">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=400&auto=format&fit=crop" alt="Vizie" class="w-full h-full object-cover">
+                    <img src="https://i.pinimg.com/736x/e5/32/d3/e532d30a87358e28265ebaaca4aec41d.jpg" alt="Vizie" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1 font-serif">Vizie</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-1 font-serif">Vizie Hafiyyan</h3>
                 <p class="text-[#74A88E] text-xs font-semibold uppercase tracking-wider mb-6">Senior Consultant</p>
                 
                 <div class="space-y-3 w-full">
@@ -56,9 +56,9 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300 border border-gray-100 flex flex-col items-center text-center group">
                 <div class="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-[#F2F9F5] group-hover:border-[#A8E6CF] transition">
-                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=400&auto=format&fit=crop" alt="Angga" class="w-full h-full object-cover">
+                    <img src="https://i.pinimg.com/1200x/25/67/c9/2567c96602a022ef63f6377923b099e3.jpg" alt="Angga" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1 font-serif">Angga</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-1 font-serif">Angga Prima</h3>
                 <p class="text-[#74A88E] text-xs font-semibold uppercase tracking-wider mb-6">Property Specialist</p>
                 
                 <div class="space-y-3 w-full">
@@ -73,9 +73,9 @@
 
             <div class="bg-white rounded-2xl p-8 shadow-sm hover:shadow-lg transition duration-300 border border-gray-100 flex flex-col items-center text-center group">
                 <div class="w-24 h-24 rounded-full overflow-hidden mb-6 border-4 border-[#F2F9F5] group-hover:border-[#A8E6CF] transition">
-                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=400&auto=format&fit=crop" alt="Elizabeth" class="w-full h-full object-cover">
+                    <img src="---" alt="Elizabeth" class="w-full h-full object-cover">
                 </div>
-                <h3 class="text-xl font-bold text-gray-900 mb-1 font-serif">Elizabeth</h3>
+                <h3 class="text-xl font-bold text-gray-900 mb-1 font-serif">Elziabeth</h3>
                 <p class="text-[#74A88E] text-xs font-semibold uppercase tracking-wider mb-6">Client Relations</p>
                 
                 <div class="space-y-3 w-full">

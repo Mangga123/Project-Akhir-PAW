@@ -37,7 +37,7 @@ Route::get('/dashboard', function () {
         if (auth()->user()->isAdmin()) {
             return redirect()->route('admin.dashboard');
         } else {
-            return redirect()->route('resident.bills.index');
+            return redirect()->route('resident.home');
         }
     }
     return view('dashboard');
@@ -78,6 +78,12 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
 
 // ==================== RESIDENT ROUTES ====================
 Route::middleware(['auth', 'verified'])->prefix('resident')->name('resident.')->group(function () {
+
+    // ✅ ROUTE BARU: Halaman Home Warga
+    Route::get('/home', function () {
+        return view('resident.home');
+    })->name('home');
+    
     // Komplain
     Route::get('/complaints', [ResidentComplaintController::class, 'index'])->name('complaints.index');
     Route::post('/complaints', [ResidentComplaintController::class, 'store'])->name('complaints.store');
