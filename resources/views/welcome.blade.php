@@ -354,7 +354,7 @@
                                     </svg>
                                 </div>
                                 <h3 class="text-white text-xl font-medium mb-2">Discover Your Dream<br>Room</h3>
-                                <p class="text-gray-300 text-xs mb-4 leading-relaxed">
+                                <p class="text-gray-300 text-s mb-4 leading-relaxed">
                                     Membuat kamar anda menjadi lebih sesuai dengan kebutuhan anda.
                                 </p>
                                 <a href="#" class="text-white font-semibold text-xs flex items-center gap-2 hover:gap-3 transition-all">
@@ -364,7 +364,7 @@
                         </div>
 
                         <div class="relative w-full h-[300px] lg:h-[320px] rounded-2xl overflow-hidden group shadow-md">
-                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Carrying Boxes" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                            <img src="https://i.pinimg.com/736x/05/d8/6b/05d86bcfb5a1b9cedda54c5d5ad2721c.jpg" alt="Carrying Boxes" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                             
                             <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -373,12 +373,15 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-white text-xl font-medium mb-2">Comprehensive<br>Management Services</h3>
-                                <p class="text-gray-300 text-xs mb-4 leading-relaxed">
-                                    Sistem yang dijamin membuat anda tidak menunggu lama.
+                                <h3 class="text-white text-xl font-medium mb-2">Comprehensive<br>Facility Services</h3>
+                                <p class="text-gray-100 text-m mb-4 leading-relaxed">
+                                    Fasilitas yang di tingkatan berbeda.
+                                    Nikmati Swimm Pool beserta lapangan Tenis
                                 </p>
-                                <a href="#" class="text-white font-semibold text-xs flex items-center gap-2 hover:gap-3 transition-all">
-                                </a>
+
+                                <a href="{{ route('facilities') }}" class="inline-flex items-center gap-2 px-10 py-3 rounded-full bg-white/50 hover:bg-white/40 text-white text-xs font-semibold transition-all duration-300 backdrop-blur-md border border-white/10 group-hover:border-white/30 hover:gap-3">
+                            More &rarr;
+                        </a>
                             </div>
                         </div>
 
