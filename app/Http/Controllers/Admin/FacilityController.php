@@ -24,7 +24,7 @@ class FacilityController extends Controller
         return view('admin.facilities.index', compact('bookings', 'date', 'type'));
     }
 
-    // Fitur Maintenance (Admin membooking slot atas nama sendiri)
+    // Fitur Maintenance (Admin membooking slot atas nama admin)
     public function storeMaintenance(Request $request)
     {
         $request->validate([
@@ -33,7 +33,7 @@ class FacilityController extends Controller
             'start_hour' => 'required|integer',
         ]);
 
-        // Cek jika sudah ada booking (baik user atau admin lain)
+        // Cek jika sudah ada booking
         $exists = FacilityBooking::where('facility_type', $request->facility_type)
                     ->where('date', $request->date)
                     ->where('start_hour', $request->start_hour)

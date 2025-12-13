@@ -30,14 +30,14 @@ class ResidentController extends Controller
         $request->validate([
             'unit_id' => 'required|exists:units,id',
             'start_date' => 'required|date',
-            'user_type' => 'required|in:new,existing', // Cek pilihan (Baru / Ada)
+            'user_type' => 'required|in:new,existing', 
         ]);
 
         $user = null;
 
-        // 2. LOGIKA PERCABANGAN (PENTING!)
+        // 2. LOGIKA Bracnh 
         if ($request->user_type == 'new') {
-            // === JIKA BUAT AKUN BARU ===
+            // JIKA BUAT AKUN BARU 
             $request->validate([
                 'name' => 'required|string|max:255',
                 'email' => 'required|email|unique:users,email',
@@ -54,7 +54,7 @@ class ResidentController extends Controller
             ]);
 
         } else {
-            // === JIKA PILIH AKUN YANG SUDAH ADA ===
+            // JIKA PILIH AKUN YANG SUDAH ADA 
             $request->validate([
                 'existing_user_id' => 'required|exists:users,id',
             ]);
@@ -63,7 +63,7 @@ class ResidentController extends Controller
             $user = User::findOrFail($request->existing_user_id);
         }
 
-        // 3. Simpan Data Penghuni (Resident)
+        // 3. Simpan Data Penghuni 
         Resident::create([
             'user_id' => $user->id,
             'unit_id' => $request->unit_id,
@@ -130,8 +130,6 @@ class ResidentController extends Controller
         if ($unit) {
             $unit->update(['status' => 'Kosong']);
         }
-
-        // Hapus data resident saja (User login tetap ada, jaga-jaga kalau dia balik lagi)
         $resident->delete();
 
         return redirect()->route('admin.residents.index')->with('success', 'Data penghuni berhasil dihapus.');

@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Auth;
 
 class PaymentController extends Controller
 {
-    /**
-     * Halaman Daftar Tagihan Saya
-     */
+    
+    // Halaman Daftar Tagihan Saya
+   
     public function index()
     {
         // Ambil data resident dari user yang login
@@ -27,9 +27,9 @@ class PaymentController extends Controller
         return view('resident.bills.index', compact('bills'));
     }
 
-    /**
-     * Halaman Form Bayar (Upload Bukti)
-     */
+     
+    // Halaman Form Bayar (Upload Bukti)
+    
     public function create(Bill $bill)
     {
         // Validasi: Pastikan yang mau bayar adalah pemilik tagihan
@@ -42,9 +42,9 @@ class PaymentController extends Controller
         return view('resident.payments.create', compact('bill'));
     }
 
-    /**
-     * Proses Simpan Bukti Bayar
-     */
+    
+    // Proses Simpan Bukti Bayar
+    
     public function store(Request $request, Bill $bill)
     {
         $request->validate([

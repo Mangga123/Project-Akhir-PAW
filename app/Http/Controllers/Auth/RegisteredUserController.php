@@ -26,7 +26,7 @@ class RegisteredUserController extends Controller
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'phone' => ['required', 'string', 'max:20'], // ✅ Wajib Diisi
+            'phone' => ['required', 'string', 'max:20'], // Wajib Diisi
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
@@ -36,7 +36,7 @@ class RegisteredUserController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role_id' => 2, // ID Warga
-            'phone' => $request->phone, // ✅ Ambil dari inputan user
+            'phone' => $request->phone, // Ambil dari inputan user
         ]);
 
         event(new Registered($user));

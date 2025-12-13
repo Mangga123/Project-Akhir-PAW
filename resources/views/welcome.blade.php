@@ -42,7 +42,7 @@
                     </div>
 
                     <a href="{{ route('login') }}" class="text-sm font-bold text-white border-2 border-white hover:bg-white hover:text-black px-4 py-1 rounded-full transition ml-1">
-                Admin Login &rarr;
+                Login &rarr;
                     </a>
                 </div>
 

@@ -40,8 +40,7 @@ class ComplaintController extends Controller
             'status' => 'Pending',
         ];
 
-        // Handle Upload Gambar (Simpan di folder public/complaints)
-        if ($request->hasFile('image')) {
+         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $filename = time() . '_' . $file->getClientOriginalName();
             $file->move(public_path('complaints'), $filename);

@@ -13,13 +13,13 @@ class FacilityController extends Controller
     {
         // Default: Hari ini & Lapangan Tenis
         $date = $request->input('date', date('Y-m-d'));
-        $type = $request->input('type', 'tennis'); // 'tennis' or 'pool'
+        $type = $request->input('type', 'tennis');  
 
         // Ambil semua booking di tanggal & fasilitas tersebut
         $bookings = FacilityBooking::where('date', $date)
                     ->where('facility_type', $type)
                     ->get()
-                    ->keyBy('start_hour'); // Supaya mudah dicek berdasarkan jam
+                    ->keyBy('start_hour');  
 
         return view('resident.facilities.booking', compact('bookings', 'date', 'type'));
     }
@@ -53,8 +53,7 @@ class FacilityController extends Controller
         return back()->with('success', 'Booking berhasil!');
     }
     
-    // Fitur Batal Booking (Opsional tapi berguna)
-    public function destroy($id)
+     public function destroy($id)
     {
         $booking = FacilityBooking::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         $booking->delete();

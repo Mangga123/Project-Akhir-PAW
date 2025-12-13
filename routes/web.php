@@ -90,7 +90,7 @@ Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.'
 // ==================== RESIDENT ROUTES ====================
 Route::middleware(['auth', 'verified'])->prefix('resident')->name('resident.')->group(function () {
 
-    // ✅ ROUTE BARU: Halaman Home Warga
+    //ROUTE : Halaman Home Warga
     Route::get('/home', function () {
         return view('resident.home');
     })->name('home');
