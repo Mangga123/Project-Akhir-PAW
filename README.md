@@ -7,7 +7,50 @@ STATUS: Active | VERSION: 1.0 | FRAMEWORK: Laravel | TYPE: Final Project
 ---
 ## 1. Cara Penggunaan
 
-# Warga # 
+
+
+# ADMINN #
+
+1. DASHBOARD : Di laman dashboard home admin* akan diperlihtkan menu dibagian kiri, dan di overview terlihat statistik secara realtime total unit, unit terisi, penghuni aktif, komplain yang merupakan dari sistem management
+
+![Database Schema](SSreadmefoto/DashboardADMIN.png)
+
+
+2. UNIT APARTEMEN : Klik menu " Unit Apartemen" dan adminn akan melihat unit apartemen yang statusnya ada Terisi, Tersedia, Maintenance. juga adminn bisa meng edit dari unit yang sudah ada. lalu di kanan atas ada menu " Tambah Unit Baru" yng dimana adminn bisa menambahkan status unit baru dengan menambah no unit, tower, lantai, tpe unit, status.
+
+![Database Schema](SSreadmefoto/UnitApartementADMIN.png)
+
+  - Menambahkan  UNIT BARU dengna klik TAMBAH UNIT BARU
+![Database Schema](SSreadmefoto/AddUnitApartementAdmin.png)
+
+3. DATA PENGHUNI : Ketika adminn mengklik menu Data Penghuni, adminn akan bisa melihat data dari penghuni mulai dari Nama, unit, kontak, mulai kontrak, status. Disini adminn bisa mengedit status jika penghuni ingin pindah unit ataupun keluar dari unit, di tombol ata ada menu tambah penghuni untuk adminn bisa menambahkan penghuni baru sesuai di unit yang ditentukan. Adminn juga bisa membuat akun guest baru yang akan di tempatkan di unit yang sudah direncanakan.
+
+![Database Schema](SSreadmefoto/DataPenghuniADMIN.png)
+
+  - Menambahkan Penghuni baru ataupun akun GUEST baru 
+![Database Schema](SSreadmefoto/DataPenghuniADDGuestsADMIN.png)
+
+4. TAGIHAN : Di menu tagihan ini adminn bisa mengelola dan melihat tagihan yang diberikan kepada penghuni mulai dari periode, jumlah total tagihan, status, beserta bukti bayar.Di bukti bayar admin bisa lihat Foto dari file yang penghuni kirimkan saat membayar tagihan serta Tombol terima jika memang sudah diterima pemabyarannya dan otomatis status akan menjadi " LUNAS ". Adminn juga bisa menambah tagihan baru kepada penghuni 
+
+![Database Schema](SSreadmefoto/TagihanADMINN.png)
+
+  - Membuat TAGIHAN BARU 
+  
+![Database Schema](SSreadmefoto/TagihanAdminnBuatTAgihan.png)
+
+
+5. LAPORAN MASUK : Di menu laporan masuk ini adminn bisa melihat laporan yang penghuni ajukan, mulai dari Tanggal, nama pelapor, masalah, bukti foto, status, sampai tindakan. dimana di tindakannya ada " Pending ", " Proses ", " Selesai ", serta simpan.
+
+![Database Schema](SSreadmefoto/LaporanMasukADMINN.png)
+
+6. KELOLA FASILITAS : Di menu kelola fasilitas, adminn bisa melihat jadwal dari lapangan yang sudah dipesan oleh pengguna, dan admin juga bisa meng " HAPUS " jadwal yang sudah di reserve, serta meng set status menjadi " MAINTENANCE " dengan sitem real time
+
+![Database Schema](SSreadmefoto/KelolaFasilitasADMINN.png)
+
+
+
+
+# WARGA # 
 
  1. Di Laman home klik " Login " 
 
