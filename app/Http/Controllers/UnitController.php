@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Unit; // Pastikan baris ini ada agar Model Unit terpanggil
-
+use App\Models\Unit; 
 class UnitController extends Controller
 {
     // Fungsi untuk menampilkan halaman index (Daftar Unit)

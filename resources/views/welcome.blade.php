@@ -42,7 +42,7 @@
                     </div>
 
                     <a href="{{ route('login') }}" class="text-sm font-bold text-white border-2 border-white hover:bg-white hover:text-black px-4 py-1 rounded-full transition ml-1">
-                Admin Login &rarr;
+                Login &rarr;
                     </a>
                 </div>
 
@@ -72,31 +72,17 @@
 
                 <div class="bg-white rounded-full w-full max-w-4xl flex flex-col md:flex-row items-center p-2 shadow-2xl">
                     
-                    <div class="w-full md:flex-1 border-b md:border-b-0 md:border-r border-gray-200 px-6 py-3 relative">
-                        <button class="w-full flex items-center justify-between text-gray-700 hover:text-black text-left font-semibold text-sm md:text-base">
-                            <span>Buy Apartment</span>
-                            <svg class="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                    </div>
-
-                    <div class="w-full md:flex-1 px-6 py-3 relative">
-                        <button class="w-full flex items-center justify-between text-gray-700 hover:text-black text-left font-semibold text-sm md:text-base">
-                            <span>Category</span>
-                            <svg class="w-4 h-4 ml-2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                    </div>
+                  
                     
                     <div class="p-1 hidden md:block">
-                        <button class="bg-[#A8E6CF] hover:bg-[#8cdfc0] text-white p-3 rounded-full transition shadow-md">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                <path stroke-linecap="round"  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                             </svg>
                         </button>
                     </div>
                 </div>
 
                 <div class="absolute bottom-12 w-full px-10 hidden md:flex justify-center items-center gap-4 text-xs text-white/90">
-                    <span class="font-bold tracking-wide mr-2">Latest Listings:</span>
+                    <span class="font-bold tracking-wide mr-2">Anggota Realty Kami:</span>
                     
                     <a href="#" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 transition">
                         <span class="w-2 h-2 rounded-full bg-[#A8E6CF]"></span>
@@ -105,23 +91,17 @@
                     
                     <a href="#" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 transition">
                         <span class="w-2 h-2 rounded-full bg-[#A8E6CF]"></span>
-                        ANGGA
+                        ANGGA PRIMA RAMADHAN
                     </a>
                     
                     <a href="#" class="flex items-center gap-2 bg-white/10 hover:bg-white/20 px-4 py-2 rounded-full backdrop-blur-md border border-white/10 transition">
                         <span class="w-2 h-2 rounded-full bg-[#A8E6CF]"></span>
-                        ELIZABETH
+                        Isi Nama Ya Janlupa
                     </a>
                 </div>
 
             </div>
         </section>
-
-
-
-
-
-
 
 
         <section id="buy" class="relative w-full bg-white py-20 px-6 md:px-16">
@@ -332,16 +312,16 @@
                             <p class="text-gray-600 text-base mb-6 leading-relaxed">
                                 Jelajah kisah dari perjuangan kami membangun lingkungan tenang
                             </p>
-                            <a href="#" class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 text-gray-800 text-xs font-semibold hover:bg-gray-900 hover:text-white transition duration-300">
-                                Learn More About Us
+                            <a href="{{ route('about') }}" class="inline-flex items-center gap-2 px-5 py-2 rounded-full border border-gray-300 text-gray-800 text-xs font-semibold hover:bg-gray-900 hover:text-white transition duration-300">
+                             Learn More About Us
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </a>
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                                  </svg>
+                                </a>
                         </div>
 
                         <div class="relative w-full h-[400px] lg:h-[480px] rounded-2xl overflow-hidden group shadow-md">
-                            <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=800&auto=format&fit=crop" alt="Couple Laughing" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                            <img src="https://i.pinimg.com/736x/fb/99/85/fb99852a13b4910cf8377397eabf7eb1.jpg" alt="Couple Laughing" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                             
                             <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -363,7 +343,8 @@
                     </div>
 
                     <div class="flex flex-col gap-6 lg:pt-12"> <div class="relative w-full h-[300px] lg:h-[320px] rounded-2xl overflow-hidden group shadow-md">
-                            <img src="https://images.unsplash.com/photo-1581578017093-cd30fba4e9d5?q=80&w=800&auto=format&fit=crop" alt="Moving Boxes Interior" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                            <img src="{{ asset('images/IMG_0705.jpg') }}" alt="Couple Laughing" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                             
                             <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -373,7 +354,7 @@
                                     </svg>
                                 </div>
                                 <h3 class="text-white text-xl font-medium mb-2">Discover Your Dream<br>Room</h3>
-                                <p class="text-gray-300 text-xs mb-4 leading-relaxed">
+                                <p class="text-gray-300 text-s mb-4 leading-relaxed">
                                     Membuat kamar anda menjadi lebih sesuai dengan kebutuhan anda.
                                 </p>
                                 <a href="#" class="text-white font-semibold text-xs flex items-center gap-2 hover:gap-3 transition-all">
@@ -383,7 +364,7 @@
                         </div>
 
                         <div class="relative w-full h-[300px] lg:h-[320px] rounded-2xl overflow-hidden group shadow-md">
-                            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=800&auto=format&fit=crop" alt="Carrying Boxes" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
+                            <img src="https://i.pinimg.com/736x/05/d8/6b/05d86bcfb5a1b9cedda54c5d5ad2721c.jpg" alt="Carrying Boxes" class="w-full h-full object-cover transition duration-700 group-hover:scale-105">
                             <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
                             
                             <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -392,12 +373,15 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
                                     </svg>
                                 </div>
-                                <h3 class="text-white text-xl font-medium mb-2">Comprehensive<br>Management Services</h3>
-                                <p class="text-gray-300 text-xs mb-4 leading-relaxed">
-                                    Sistem yang dijamin membuat anda tidak menunggu lama.
+                                <h3 class="text-white text-xl font-medium mb-2">Comprehensive<br>Facility Services</h3>
+                                <p class="text-gray-100 text-m mb-4 leading-relaxed">
+                                    Fasilitas yang di tingkatan berbeda.
+                                    Nikmati Swimm Pool beserta lapangan Tenis
                                 </p>
-                                <a href="#" class="text-white font-semibold text-xs flex items-center gap-2 hover:gap-3 transition-all">
-                                </a>
+
+                                <a href="{{ route('facilities') }}" class="inline-flex items-center gap-2 px-10 py-3 rounded-full bg-white/50 hover:bg-white/40 text-white text-xs font-semibold transition-all duration-300 backdrop-blur-md border border-white/10 group-hover:border-white/30 hover:gap-3">
+                            More &rarr;
+                        </a>
                             </div>
                         </div>
 
@@ -430,7 +414,7 @@
                             Let's Simply Begin With Realty
                         </h2>
                         <p class="text-white/90 text-[10px] md:text-xs mb-6 font-light max-w-md mx-auto leading-relaxed">
-                            Blandit Aliquam Donec Sed Morbi Congue Eget Lorem Viverra Porta Id Lobortis.
+                            Mari mulai bersama kami, REALTY.
                         </p>
                         
                         <div class="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -440,12 +424,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
                                 </svg>
                             </a>
-                            <a href="#" class="border border-white/50 text-white px-5 py-2 rounded-full font-semibold hover:bg-white/10 transition flex items-center gap-2 text-[10px] md:text-xs">
-                                Get Started
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                                </svg>
-                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -454,7 +433,7 @@
                     <span class="text-2xl md:text-3xl font-serif text-gray-300">VIZIE</span>
                     <span class="text-2xl md:text-3xl font-sans font-bold text-gray-300">PROJECT</span>
                     <span class="text-2xl md:text-3xl font-light text-gray-300">ANGGA</span>
-                    <span class="text-xl md:text-2xl font-mono font-bold text-gray-300 tracking-widest">ELIZABETH</span>
+                    <span class="text-xl md:text-2xl font-mono font-bold text-gray-300 tracking-widest">Isi nama kalian ini oi</span>
                 </div>
 
             </div>

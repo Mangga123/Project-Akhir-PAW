@@ -46,12 +46,9 @@ class BillController extends Controller
         return redirect()->route('admin.bills.index')->with('success', 'Tagihan berhasil dibuat!');
     }
 
-    // ==========================================
-    //  INI BAGIAN YANG DIPERBAIKI (FIX ERROR DELETE)
-    // ==========================================
     public function destroy(Bill $bill)
     {
-        // Cek apakah tagihan ini punya pembayaran terkait?
+        // Cek apa tagihan ini punya pembayaran terkait?
         if ($bill->payment) {
             // Hapus dulu pembayarannya
             $bill->payment->delete();

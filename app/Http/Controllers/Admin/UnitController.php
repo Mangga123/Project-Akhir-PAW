@@ -8,9 +8,9 @@ use Illuminate\Http\Request;
 
 class UnitController extends Controller
 {
-    /**
-     * Tampilkan daftar semua unit.
-     */
+    
+    //Tampilkan daftar semua unit.
+     
     public function index()
     {
         // Ambil data unit, urutkan terbaru, dan paginasi 10 per halaman
@@ -18,17 +18,17 @@ class UnitController extends Controller
         return view('admin.units.index', compact('units'));
     }
 
-    /**
-     * Tampilkan form untuk membuat unit baru.
-     */
+    
+    // Tampilkan form untuk membuat unit baru.
+     
     public function create()
     {
         return view('admin.units.create');
     }
 
-    /**
-     * Simpan data unit baru ke database.
-     */
+    
+    // Simpan data unit baru ke database.
+     
     public function store(Request $request)
     {
         $request->validate([
@@ -45,17 +45,17 @@ class UnitController extends Controller
             ->with('success', 'Unit apartemen berhasil ditambahkan!');
     }
 
-    /**
-     * Tampilkan form edit unit.
-     */
+    
+    // Tampilkan form edit unit.
+     
     public function edit(Unit $unit)
     {
         return view('admin.units.edit', compact('unit'));
     }
 
-    /**
-     * Update data unit yang diedit.
-     */
+    
+    // Update data unit yang diedit.
+     
     public function update(Request $request, Unit $unit)
     {
         $request->validate([
@@ -72,9 +72,9 @@ class UnitController extends Controller
             ->with('success', 'Data unit berhasil diperbarui!');
     }
 
-    /**
-     * Hapus unit.
-     */
+    
+    // Hapus unit.
+    
     public function destroy(Unit $unit)
     {
         $unit->delete();

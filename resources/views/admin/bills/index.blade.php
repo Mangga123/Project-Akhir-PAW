@@ -1,145 +1,127 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Kelola Tagihan Bulanan') }}
-        </h2>
-    </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            
-            @if (session('success'))
-                <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4">
-                    {{ session('success') }}
-                </div>
-            @endif
-            @if (session('error'))
-                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4">
-                    {{ session('error') }}
-                </div>
-            @endif
-
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    
-                    <div class="flex justify-between items-center mb-4">
-                        <h3 class="text-lg font-bold text-gray-800">Daftar Tagihan</h3>
-                        <a href="{{ route('admin.bills.create') }}" class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded shadow-lg">
-                            + Buat Tagihan Baru
-                        </a>
-                    </div>
-
-                    <div class="overflow-x-auto">
-                        <table class="min-w-full table-auto border-collapse border border-gray-200">
-                            <thead class="bg-gray-100">
-                                <tr>
-                                    <th class="border px-4 py-2 text-left text-gray-600">Unit & Penghuni</th>
-                                    <th class="border px-4 py-2 text-left text-gray-600">Periode</th>
-                                    <th class="border px-4 py-2 text-left text-gray-600">Total</th>
-                                    <th class="border px-4 py-2 text-left text-gray-600">Status</th>
-                                    <th class="border px-4 py-2 text-left text-gray-600">Bukti Bayar</th>
-                                    <th class="border px-4 py-2 text-center text-gray-600">Aksi</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @forelse ($bills as $bill)
-                                    <tr class="hover:bg-gray-50">
-                                        <td class="border px-4 py-2">
-                                            <div class="font-bold text-gray-800">Unit {{ $bill->resident->unit->unit_number ?? '-' }}</div>
-                                            <div class="text-sm text-gray-500">{{ $bill->resident->user->name ?? 'User Hapus' }}</div>
-                                        </td>
-                                        <td class="border px-4 py-2 text-gray-700">{{ $bill->month }}</td>
-                                        <td class="border px-4 py-2 font-bold text-gray-900">
-                                            Rp {{ number_format($bill->amount, 0, ',', '.') }}
-                                        </td>
-                                        <td class="border px-4 py-2">
-                                            @if($bill->status == 'Lunas')
-                                                <span class="bg-green-100 text-green-800 text-xs font-bold px-2.5 py-0.5 rounded">Lunas</span>
-                                            @elseif($bill->status == 'Menunggu Konfirmasi')
-                                                <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-2.5 py-0.5 rounded">Cek Bukti!</span>
-                                            @else
-                                                <span class="bg-red-100 text-red-800 text-xs font-bold px-2.5 py-0.5 rounded">Belum Bayar</span>
-                                            @endif
-                                        </td>
-                                        
-                                        <!-- KOLOM BUKTI BAYAR -->
-                                        <td class="border px-4 py-2">
-                                            @if($bill->payment && $bill->payment->proof_image)
-                                                <a href="{{ asset('payments/' . $bill->payment->proof_image) }}" target="_blank" class="text-blue-600 hover:underline text-sm font-bold">
-                                                    📷 Lihat Foto
-                                                </a>
-                                                <div class="text-xs text-gray-500 mt-1">Tgl: {{ $bill->payment->payment_date }}</div>
-                                            @else
-                                                <span class="text-gray-400 text-sm">-</span>
-                                            @endif
-                                        </td>
-
-                                        <!-- KOLOM AKSI -->
-                                        <td class="border px-4 py-2 text-center">
-                                            @if($bill->status == 'Menunggu Konfirmasi')
-                                                <!-- TAMPILKAN TOMBOL TERIMA / TOLAK -->
-                                                <div class="flex flex-col space-y-2">
-                                                    <!-- Form Terima -->
-                                                    <form action="{{ route('admin.bills.confirm', $bill->id) }}" method="POST">
-                                                        @csrf
-                                                        <input type="hidden" name="action" value="accept">
-                                                        <button type="submit" class="bg-green-500 hover:bg-green-600 text-white text-xs font-bold py-1 px-2 rounded w-full shadow">
-                                                            ✅ Terima
-                                                        </button>
-                                                    </form>
-                                                    
-                                                    <!-- Tombol Tolak (Trigger JS) -->
-                                                    <button onclick="rejectPayment({{ $bill->id }})" class="bg-red-500 hover:bg-red-600 text-white text-xs font-bold py-1 px-2 rounded w-full shadow">
-                                                        ❌ Tolak
-                                                    </button>
-                                                    
-                                                    <!-- Form Hidden untuk Tolak -->
-                                                    <form id="reject-form-{{ $bill->id }}" action="{{ route('admin.bills.confirm', $bill->id) }}" method="POST" style="display:none;">
-                                                        @csrf
-                                                        <input type="hidden" name="action" value="reject">
-                                                        <input type="hidden" name="admin_note" id="note-{{ $bill->id }}">
-                                                    </form>
-                                                </div>
-                                            @else
-                                                <!-- Tombol Hapus Biasa -->
-                                                <form action="{{ route('admin.bills.destroy', $bill->id) }}" method="POST" onsubmit="return confirm('Hapus tagihan ini?');">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-red-500 hover:text-red-700 font-bold text-sm">Hapus</button>
-                                                </form>
-                                            @endif
-                                        </td>
-                                    </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="6" class="border px-4 py-8 text-center text-gray-400 italic">
-                                            Belum ada data tagihan. Silakan buat tagihan baru.
-                                        </td>
-                                    </tr>
-                                @endforelse
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <div class="mt-4">
-                        {{ $bills->links() }}
-                    </div>
-
-                </div>
+    <div class="max-w-7xl mx-auto mt-4">
+        
+        <div class="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-800 tracking-tight">Kelola Tagihan Bulanan</h2>
+                <p class="text-gray-500 mt-2 text-sm">Pantau status pembayaran dan kelola tagihan penghuni.</p>
             </div>
+            
+            <a href="{{ route('admin.bills.create') }}" class="flex items-center gap-2 bg-[#74A88E] hover:bg-[#5e8f76] text-white font-bold py-3 px-6 rounded-xl shadow-sm transition transform hover:-translate-y-0.5">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+                Buat Tagihan Baru
+            </a>
         </div>
-    </div>
 
-    <!-- Script Sederhana untuk Input Alasan Tolak -->
-    <script>
-        function rejectPayment(id) {
-            let note = prompt("Masukkan alasan penolakan (Wajib diisi):", "Bukti transfer tidak jelas / Salah nominal.");
-            if (note != null && note.trim() !== "") {
-                document.getElementById('note-' + id).value = note;
-                document.getElementById('reject-form-' + id).submit();
-            } else if (note != null) {
-                alert("Alasan penolakan tidak boleh kosong!");
-            }
-        }
-    </script>
+        <div class="bg-white rounded-[20px] shadow-sm border border-[#EBE5E0] overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-[#F9F9F7] text-gray-500 text-xs uppercase tracking-wider border-b border-[#EBE5E0]">
+                            <th class="p-6 font-bold">Unit & Penghuni</th>
+                            <th class="p-6 font-bold">Periode</th>
+                            <th class="p-6 font-bold">Total</th>
+                            <th class="p-6 font-bold text-center">Status</th>
+                            <th class="p-6 font-bold">Bukti Bayar</th>
+                            <th class="p-6 font-bold text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-[#F5F0EB]">
+                        @forelse ($bills as $bill)
+                        <tr class="hover:bg-[#FAFAFA] transition duration-200">
+                            
+                            <td class="p-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-[#E6F4EA] flex items-center justify-center text-[#74A88E] font-bold text-xs">
+                                        {{ $bill->resident->unit->unit_number ?? '?' }}
+                                    </div>
+                                    <div>
+                                        <p class="font-bold text-gray-800">Unit {{ $bill->resident->unit->unit_number ?? '-' }}</p>
+                                        <p class="text-xs text-gray-500">{{ $bill->resident->user->name ?? 'Tidak Diketahui' }}</p>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td class="p-6">
+                                <span class="text-sm font-medium text-gray-700">{{ $bill->month }}</span>
+                                <p class="text-[13px] text-gray-400 mt-1">Jatuh Tempo: {{ \Carbon\Carbon::parse($bill->due_date)->format('d M Y') }}</p>
+                            </td>
+
+                            <td class="p-6">
+                                <span class="text-lg font-bold text-gray-800">Rp {{ number_format($bill->amount, 0, ',', '.') }}</span>
+                            </td>
+
+                            <td class="p-6 text-center">
+                                @if($bill->status == 'Lunas')
+                                    <span class="px-3 py-1 rounded-full text-[13px] font-bold bg-[#E6F4EA] text-[#1E4620] border border-[#CEEAD6]">
+                                        Lunas
+                                    </span>
+                                @elseif($bill->status == 'Menunggu Konfirmasi')
+                                    <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-[#FFF7ED] text-[#9A3412] border border-[#FFEDD5]">
+                                        Verifikasi
+                                    </span>
+                                @else
+                                    <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-[#FEF2F2] text-[#991B1B] border border-[#FEE2E2]">
+                                        Belum Bayar
+                                    </span>
+                                @endif
+                            </td>
+
+                            <td class="p-6">
+                                @if($bill->payment)
+                                    <div class="flex flex-col items-start gap-1">
+                                        <a href="{{ asset('storage/' . $bill->payment->proof_image) }}" target="_blank" class="flex items-center gap-1 text-xs font-bold text-[#74A88E] hover:underline hover:text-[#5e8f76]">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                            Lihat Foto
+                                        </a>
+                                        <span class="text-[10px] text-gray-400">Tgl: {{ $bill->payment->payment_date }}</span>
+                                        
+                                        @if($bill->status == 'Menunggu Konfirmasi')
+                                            <form action="{{ route('admin.bills.confirm', $bill->id) }}" method="POST" class="mt-2">
+                                                @csrf
+                                                <button type="submit" class="bg-[#74A88E] text-white px-3 py-1 rounded text-[10px] font-bold hover:bg-[#5e8f76] transition shadow-sm">
+                                                    ✔ Terima
+                                                </button>
+                                            </form>
+                                        @endif
+                                    </div>
+                                @else
+                                    <span class="text-xs text-gray-400 italic">- Belum upload -</span>
+                                @endif
+                            </td>
+
+                            <td class="p-6 text-center">
+                                <form action="{{ route('admin.bills.destroy', $bill->id) }}" method="POST" onsubmit="return confirm('Yakin ingin menghapus tagihan ini?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-400 hover:text-red-600 font-bold text-xs transition flex items-center justify-center gap-1 mx-auto">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                                        Hapus
+                                    </button>
+                                </form>
+                            </td>
+
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="6" class="p-12 text-center text-gray-400">
+                                <div class="flex flex-col items-center justify-center">
+                                    <svg class="w-12 h-12 mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                                    <p>Belum ada data tagihan.</p>
+                                </div>
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+            
+            @if(method_exists($bills, 'links'))
+            <div class="p-4 bg-[#F9F9F7] border-t border-[#EBE5E0]">
+                {{ $bills->links() }}
+            </div>
+            @endif
+        </div>
+
+    </div>
 </x-app-layout>
